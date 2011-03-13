@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block style_block %}
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/skin.css">
+{% endblock %}
+{% block content %}
+	<h1 id="">Add a New Lie</h1>
+	<form action="{{ url_for('new_lie') }}" method="post" accept-charset="utf-8">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.title.label }}
+			{{ form.title|safe }}
+			{% if form.title.errors %}
+			<ul class="errors">
+				{% for error in form.title.errors %}
+				<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</p>
+		<p class="yui-skin-sam">
+			{{ form.body.label }}
+			{{ form.body|safe }}
+			{% if form.body.errors %}
+			<ul class="errors">
+				{% for error in form.body.errors %}
+				<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</p>
+		<p><input type="submit" value="Add Lie"/></p>
+    </form>
+    <p>Feel free to put anything you want inside the body, but be aware that all submissions will be examined for their suitability based on content. In other words, don't get upset if your submission doesn't show up. Submissions may be edited for length and/or content.  By making a submission, you agree to give lies-i-told-my-kids.com permission to include your submission in future projects royalty-free and with no compensation.
+    </p>
+    <p>
+    <a href="{{ url_for('main') }}">Return to main page</a>&nbsp;
+
+{% endblock %}
+{% block tail_script %}
+<script type="text/javascript" src="/static/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+    tinyMCE.init({mode:"textareas"});
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<p>
+<a href="{{ url_for('new_lie') }}">Submit a new lie</a>&nbsp;
+{% for label, link in navigation_links %}
+<a href = "{{ link }}">{{ label }}</a>&nbsp; 
+{% endfor %}
+</p>
+{% with messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+		<ul class="flash">
+			 {% for category, message in messages %}
+				<li class="{{category}}">{{ message }}</li>
+			 {% endfor %}
+		</ul>
+	{% endif %}
+{% endwith %}
+{% for lie in lies %}
+<i>{{ lie.title}}</i><br><br>
+{{ lie.body|safe }}
+{% endfor %}
+{% endblock %}
+

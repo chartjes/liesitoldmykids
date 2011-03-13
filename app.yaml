@@ -1,0 +1,32 @@
+application: liesitoldmykids 
+version: 2 
+runtime: python
+api_version: 1
+
+default_expiration: "5d"
+
+builtins:
+- datastore_admin: on
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /favicon.ico
+  static_files: application/static/img/favicon.ico
+  upload: application/static/img/favicon.ico
+
+- url: /robots.txt
+  static_files: application/static/robots.txt
+  upload: application/static/robots.txt
+
+- url: /static
+  static_dir: application/static
+
+- url: /tasks/check_for_spam
+  script: check_for_spam.py
+  login: admin
+
+- url: .*
+  script: main.py
+
